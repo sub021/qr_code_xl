@@ -1,16 +1,16 @@
-Function Generate_QR(QR_Value As String)
+Function GETQRCODES(QrCodeValues As String)
 Dim URL As String
-Dim MyCell As Range
-Set MyCell = Application.Caller
-URL = "https://chart.googleapis.com/chart?chs=100x100&&cht=qr&chl=" & QR_Value
+Dim CellValues As Range
+Set CellValues = Application.Caller
+URL = "https://chart.googleapis.com/chart?chs=100x100&&cht=qr&chl=" & QrCodeValues
 On Error Resume Next
-ThisWorkSheet.Pictures("My_QR_CODE_" & MyCell.Address(False, False)).Delete
+ActiveSheet.Pictures("Generated_QR_CODES_" & CellValues.Address(False, False)).Delete
 On Error GoTo 0
-ThisWorkSheet.Pictures.Insert(URL).Select
+ActiveSheet.Pictures.Insert(URL).Select
 With Selection.ShapeRange(1)
-.Name = "My_QR_CODE_" & My_Cell.Address(False, False)
-.Left = MyCell.Left + 5
-.Top = MyCell.Top + 5
+    .Name = "Generated_QR_CODES_" & CellValues.Address(False, False)
+    .Left = CellValues.Left + 5
+    .Top = CellValues.Top + 5
 End With
-GenerateQR = ""
+GETQRCODES = ""
 End Function
